@@ -1,0 +1,137 @@
+.inquest__wrapper {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+
+	z-index: 10;
+	color: #000;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	overflow: hidden;
+}
+.op_0 {
+	opacity: 0;
+	user-select: none;
+	pointer-events: none;
+}
+
+.slide {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	position: relative;
+	height: 100%;
+
+	// background-color: #0000004a;
+
+	--ratio: 0.45;
+	width: calc(100% * var(--ratio));
+
+	// @media (min-width: 2650px) {
+	// 	width: calc(2650px * var(--ratio));
+	// }
+	// @media (max-width: 2650px) {
+	// 	width: calc(2450px * var(--ratio));
+	// }
+	// @media (max-width: 1500px) {
+	// 	width: calc(1500px * var(--ratio));
+	// }
+	// @media (max-width: 1170px) {
+	// 	width: calc(1170px * var(--ratio));
+	// }
+	// @media (max-width: 970px) {
+	// 	width: calc(970px * var(--ratio));
+	// }
+	// @media (max-width: 720px) {
+	// 	width: calc(720px * var(--ratio));
+	// }
+	// @media (max-width: 288px) {
+	// 	width: 200px;
+	// }
+}
+.slide__counter {
+	width: 80%;
+	// margin-top: -100px;
+	padding-bottom: 2vh;
+	margin-bottom: 2vh;
+
+	text-align: center;
+	span {
+		font-size: calc(10vw * 0.4);
+	}
+
+	color: #fefffe;
+	pointer-events: none;
+	user-select: none;
+
+	@media (min-aspect-ratio: 815/420) {
+		width: auto;
+		span {
+			font-size: calc(10vh * 0.6);
+		}
+	}
+}
+
+.slide__mistery {
+	span {
+		color: #fff;
+		font-size: calc(10vw * 3.1);
+	}
+
+	width: 70%;
+	aspect-ratio: 1;
+
+	@media (min-aspect-ratio: 815/420) {
+		width: auto;
+		height: 40%;
+		span {
+			font-size: calc(10vh * 3.1);
+		}
+	}
+	background: no-repeat center/100% url("../../resources/ramka_cut.png");
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	pointer-events: none;
+	user-select: none;
+}
+
+.slide__buttons {
+	width: 90vw;
+	display: flex;
+}
+
+.slide__button {
+	cursor: pointer;
+	span {
+		display: block;
+		color: #2ac71b;
+		font-size: calc(10vw * 0.5);
+		letter-spacing: 4px;
+	}
+
+	width: 80%;
+	aspect-ratio: 4.219;
+
+	@media (min-aspect-ratio: 815/420) {
+		width: auto;
+		height: 10%;
+		span {
+			font-size: calc(10vh * 0.4);
+		}
+	}
+	background: no-repeat center/100% url("../../resources/start_btn_cut.png");
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
