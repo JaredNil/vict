@@ -40,11 +40,13 @@ const Inquest = () => {
 			: newQuestion.bind({ ...this })()
 	}
 	function lose() {
-
-		setCounter(['start'])
-		setState({
-			...startState,
-		})
+		getLoseStatus(this)
+		setTimeout(() => {
+			setCounter(['start'])
+			setState({
+				...startState,
+			})
+		}, 1200);
 	}
 
 	const getRandomQuestion = (counter, state) => {
@@ -81,11 +83,22 @@ const Inquest = () => {
 			pictureCount: 3,
 		},
 	]
+
 	const promocode = {
 		current: 'promo',
 		textContent: [['', () => { }], ['ПОЗДРАВЛЯЕМ', () => { }], ['', () => { }]],
 		styleContainer: [' op_0', ' ', ' op_0'],
 		pictureCount: 1,
+	}
+
+
+	function getLoseStatus(state) {
+		console.log(state)
+
+		setState({
+			...state.state,
+			styleContainer: ['red', 'red', 'red']
+		})
 	}
 
 
@@ -97,18 +110,49 @@ const Inquest = () => {
 	const getStyleForButton = (index) => {
 		return `slide__button ${state.styleContainer[index]}`
 	}
-	const getStateCounter = () => { return (counter.length - 1) }
+	const getStateCounter = () => {
+		return (counter.length == 5) ? 3 : (counter.length - 1)
+	}
+	const getTotalPicture = () => {
+		return state.pictureCount
+	}
+
+	const getf = () => {
+		// let count = new Array(getTotalPicture()).fill('')
+		let count = new Array(3).fill('')
+		let a = count.map((_, index) => {
+			return (<div className='slide__mistery' key={index}>		<span>?</span>	</div>)
+		})
+
+		return a
+	}
 
 	return (
 		<div className='inquest__wrapper'>
 
 			<div className='slide'>
 				<div className='slide__counter'>
-					<span id='count'>{getStateCounter()}/3</span>
+					<span id='count' className={([1, 2, 3].includes(getStateCounter())) ? '' : 'hide'}>
+						{getStateCounter()}/3
+					</span>
 				</div>
-				<div className='slide__mistery'>
-					<span>?</span>
+				<div className="slide__picture">
+					{
+						getf()
+					}
+					{/* <div className='slide__mistery'>
+						<span>?</span>
+					</div>
+					<div className='slide__mistery'>
+						<span>?</span>
+					</div>
+					<div className='slide__mistery'>
+						<span>?</span>
+					</div> */}
+
 				</div>
+
+
 				<div className="slide__buttons">
 
 					<div className={getStyleForButton(0)} onClick={getClickEventHandler(0).bind({ state, counter })}>
@@ -129,65 +173,4 @@ const Inquest = () => {
 };
 
 export default Inquest;
-
-
-
-
-
-
-
-
-{/* {
-				(!start) ?
-					<Start startChanger={startChanger} />
-					:
-					<Question1 startChanger={startChanger} />
-			} */}
-
-
-// const Start = (props) => {
-// 	function startHandler() {
-// 		props.startChanger(true)
-// 	}
-
-// 	return (
-// 		<div className='start slide'>
-// 			<div className='slide__mistery'>
-// 				<span>?</span>
-// 			</div>
-// 			<div className="slide__buttons">
-// 				<div className="slide__button op_0" onClick={startHandler}>
-// 					<span>START</span>
-// 				</div>
-// 				<div className="slide__button " onClick={startHandler}>
-// 					<span>START</span>
-// 				</div>
-// 				<div className="slide__button op_0 " onClick={startHandler}>
-// 					<span>START</span>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	);
-// };
-
-// const Question1 = (props) => {
-// 	function startHandler() {
-// 		props.startChanger(false)
-// 	}
-
-// 	return (
-// 		<div className='start slide'>
-// 			<div className='start__mistery'>
-// 				<span>?</span>
-// 			</div>
-// 			<div className="start__button" onClick={startHandler}>
-// 				<span>1ый вопрос</span>
-// 			</div>
-// 			<div className="start__button" onClick={startHandler}>
-// 				<span>1ый вопрос</span>
-// 			</div>
-// 		</div>
-// 	);
-// };
-
 
