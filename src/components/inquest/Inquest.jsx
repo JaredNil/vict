@@ -1,6 +1,14 @@
 import React, { useEffect } from 'react';
 import './inquest.scss'
 
+import gavai1 from '../../resources/gavai/gavai1.png'
+
+import teriyaki1 from '../../resources/teriyaki/teriyaki1.png'
+import teriyaki2 from '../../resources/teriyaki/teriyaki2.png'
+
+import america1 from '../../resources/america/america1.png'
+import america2 from '../../resources/america/america2.png'
+import america3 from '../../resources/america/america3.png'
 
 
 const Inquest = () => {
@@ -66,21 +74,27 @@ const Inquest = () => {
 	const question = [
 		{
 			current: 'q0',
-			textContent: [['q0Ответ1', win], ['q0Ответ2', lose], ['q0твет0', lose]],
+			text: 'Гавай',
+			textContent: [['Гавайская', win], ['Пепперони и томаты', lose], ['Чикен Спайси', lose]],
 			styleContainer: [' ', ' ', ' '],
 			pictureCount: 1,
+			pictureStorage: [gavai1]
 		},
 		{
 			current: 'q1',
-			textContent: [['q1Ответ1', win], ['q1Ответ2', lose], ['q1Ответ3', lose]],
+			text: 'Терияки',
+			textContent: [['Терияки', win], ['Сырный', lose], ['Камамбер', lose]],
 			styleContainer: [' ', ' ', ' '],
 			pictureCount: 2,
+			pictureStorage: [teriyaki1, teriyaki2]
 		},
 		{
 			current: 'q2',
-			textContent: [['q2Ответ1', win], ['q2Ответ2', lose], ['q2Ответ3', lose]],
+			text: 'Американо',
+			textContent: [['Американо', win], ['Гавайская', lose], ['Греческая', lose]],
 			styleContainer: [' ', ' ', ' '],
 			pictureCount: 3,
+			pictureStorage: [america1, america2, america3]
 		},
 	]
 
@@ -116,39 +130,43 @@ const Inquest = () => {
 	const getTotalPicture = () => {
 		return state.pictureCount
 	}
-
-	const getf = () => {
-		// let count = new Array(getTotalPicture()).fill('')
-		let count = new Array(3).fill('')
-		let a = count.map((_, index) => {
-			return (<div className='slide__mistery' key={index}>		<span>?</span>	</div>)
-		})
-
-		return a
+	const getTotalPictureToClass = () => {
+		if (state.pictureCount == 3) {
+			return 'third'
+		} else if (state.pictureCount == 2) {
+			return 'two'
+		}
+		return 'one'
 	}
+
+	const getPictureFile = (index) => {
+		if (!state.pictureStorage) {
+			return <span>?</span>
+		}
+		let temp = state.pictureStorage[index]
+		return <img src={temp} alt="#" />
+	}
+
 
 	return (
 		<div className='inquest__wrapper'>
 
 			<div className='slide'>
-				<div className='slide__counter'>
+				<div className={`slide__counter`}>
 					<span id='count' className={([1, 2, 3].includes(getStateCounter())) ? '' : 'hide'}>
 						{getStateCounter()}/3
 					</span>
 				</div>
-				<div className="slide__picture">
+				<div className={`slide__picture ${getTotalPictureToClass()}`}>
 					{
-						getf()
+						new Array(getTotalPicture()).fill('').map((_, index) => {
+							return (<div className='slide__mistery' key={index}>
+								{
+									getPictureFile(index)
+								}
+							</div>)
+						})
 					}
-					{/* <div className='slide__mistery'>
-						<span>?</span>
-					</div>
-					<div className='slide__mistery'>
-						<span>?</span>
-					</div>
-					<div className='slide__mistery'>
-						<span>?</span>
-					</div> */}
 
 				</div>
 
