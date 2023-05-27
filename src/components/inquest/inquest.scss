@@ -113,6 +113,7 @@
 .slide__button {
 	cursor: pointer;
 	span {
+		user-select: none;
 		display: block;
 		color: #2ac71b;
 		font-size: calc(10vw * 0.5);
