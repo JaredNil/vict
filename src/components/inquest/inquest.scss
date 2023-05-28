@@ -176,7 +176,7 @@
 	width: 90vw;
 	display: flex;
 	top: 10px;
-	@media (max-aspect-ratio: 385/667) {
+	@media (max-aspect-ratio: 0.7) {
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
