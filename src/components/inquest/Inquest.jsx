@@ -78,7 +78,7 @@ const Inquest = () => {
 	}
 
 	function win() {
-		(this.counter.length === 15)
+		(this.counter.length === 5)
 			? setState({ ...promocode, })
 			: newQuestion.bind({ ...this })()
 	}
@@ -94,7 +94,7 @@ const Inquest = () => {
 
 	const getRandomQuestion = (counter, state) => {
 
-		if (counter.length < 15) {
+		if (counter.length < 5) {
 			let random = Math.floor(Math.random() * 15)
 			while (counter.includes(`q${random}`)) {
 				random = Math.floor(Math.random() * 15)
@@ -173,7 +173,7 @@ const Inquest = () => {
 		{
 			current: 'q8',
 			text: 'Цезарь',
-			textContent: [['Черепаха', lose], ['Зимний', lose], ['Цезарь', win]],
+			textContent: [['Черепаха', lose], ['Зимний', lose], ['Цезарь с курицей', win]],
 			styleContainer: [' ', ' ', ' '],
 			pictureCount: 1,
 			pictureStorage: [cesar]
@@ -254,7 +254,7 @@ const Inquest = () => {
 		return `slide__button ${state.styleContainer[index]}`
 	}
 	const getStateCounter = () => {
-		return (counter.length === 15) ? 15 : (counter.length - 1)
+		return (counter.length === 6) ? 5 : (counter.length - 1)
 	}
 	const getTotalPicture = () => {
 		return state.pictureCount
@@ -282,8 +282,8 @@ const Inquest = () => {
 
 			<div className='slide'>
 				<div className={`slide__counter`}>
-					<span id='count' className={([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].includes(getStateCounter())) ? '' : 'hide'}>
-						{getStateCounter()}/15
+					<span id='count' className={([0, 1, 2, 3, 4, 5].includes(getStateCounter())) ? '' : 'hide'}>
+						{getStateCounter()}/5
 					</span>
 				</div>
 				<div className={`slide__picture ${getTotalPictureToClass()}`}>

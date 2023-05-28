@@ -182,9 +182,10 @@
 		flex-direction: column;
 
 		.slide__button {
-			// height: 80px;
-
 			width: 60%;
+			span {
+				font-size: calc(10vw * 0.4);
+			}
 		}
 	}
 }
