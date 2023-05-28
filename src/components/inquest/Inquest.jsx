@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './inquest.scss'
 
 import gavai1 from '../../resources/gavai/gavai1.png'
@@ -61,25 +61,24 @@ const Inquest = () => {
 
 	React.useEffect(
 		() => {
-
 			if (!counter.includes(state.current)) {
-				let newCounter = [...counter, state.current]
+				let newCounter = [...counter, state.current].sort()
 				setCounter(newCounter)
 			}
-			// console.log(counter)
 		}, [state.current]
 	)
 
 	function newQuestion() {
-		console.log(this)
+		// console.log(this.counter)
 		const nextQuest = question[getRandomQuestion(this.counter, this.state)]
 
 		setState({
 			...nextQuest,
 		})
 	}
+
 	function win() {
-		(this.counter.length == 15)
+		(this.counter.length === 15)
 			? setState({ ...promocode, })
 			: newQuestion.bind({ ...this })()
 	}
@@ -94,15 +93,14 @@ const Inquest = () => {
 	}
 
 	const getRandomQuestion = (counter, state) => {
+
 		if (counter.length < 15) {
 			let random = Math.floor(Math.random() * 15)
 			while (counter.includes(`q${random}`)) {
 				random = Math.floor(Math.random() * 15)
 			}
-			console.log(random)
 			return random
 		}
-
 		return state.current.split('')[1]
 	}
 
@@ -142,11 +140,11 @@ const Inquest = () => {
 		},
 		{
 			current: 'q4',
-			text: 'Сырная',
-			textContent: [['Пепперони', lose], ['Сальса', lose], ['Сырная', win]],
+			text: 'Греческая',
+			textContent: [['Римская', lose], ['Греческая', win], ['Португальская', lose]],
 			styleContainer: [' ', ' ', ' '],
 			pictureCount: 2,
-			pictureStorage: [ham1, ham2]
+			pictureStorage: [greek1, greek2]
 		},
 		{
 			current: 'q5',
@@ -157,7 +155,7 @@ const Inquest = () => {
 			pictureStorage: [cheese1, cheese2, cheese3]
 		},
 		{
-			current: 'q5',
+			current: 'q6',
 			text: 'Хотдог',
 			textContent: [['Хотдог', win], ['Чикендог', lose], ['Хоткэт', lose]],
 			styleContainer: [' ', ' ', ' '],
@@ -165,7 +163,7 @@ const Inquest = () => {
 			pictureStorage: [hotdog1, hotdog2]
 		},
 		{
-			current: 'q6',
+			current: 'q7',
 			text: 'Куриная',
 			textContent: [['Сырная', lose], ['Куриная', win], ['Пепперони', lose]],
 			styleContainer: [' ', ' ', ' '],
@@ -173,7 +171,7 @@ const Inquest = () => {
 			pictureStorage: [chicken1, chicken2, chicken3]
 		},
 		{
-			current: 'q7',
+			current: 'q8',
 			text: 'Цезарь',
 			textContent: [['Черепаха', lose], ['Зимний', lose], ['Цезарь', win]],
 			styleContainer: [' ', ' ', ' '],
@@ -181,7 +179,7 @@ const Inquest = () => {
 			pictureStorage: [cesar]
 		},
 		{
-			current: 'q8',
+			current: 'q9',
 			text: 'Итальянская',
 			textContent: [['Мясная', lose], ['Итальянская', win], ['Мексиканская', lose]],
 			styleContainer: [' ', ' ', ' '],
@@ -189,7 +187,7 @@ const Inquest = () => {
 			pictureStorage: [italic1, italic2]
 		},
 		{
-			current: 'q9',
+			current: 'q10',
 			text: 'Сырный цыплёнок',
 			textContent: [['Сырный цыплёнок', win], ['Томатный цыпленок', lose], ['Сальса', lose]],
 			styleContainer: [' ', ' ', ' '],
@@ -197,7 +195,7 @@ const Inquest = () => {
 			pictureStorage: [cheeseChicken]
 		},
 		{
-			current: 'q10',
+			current: 'q11',
 			text: 'Карбонара',
 			textContent: [['Фишролл', lose], ['Чизкейк', lose], ['Карбонара', win]],
 			styleContainer: [' ', ' ', ' '],
@@ -205,20 +203,12 @@ const Inquest = () => {
 			pictureStorage: [carbonara1, carbonara2, carbonara3]
 		},
 		{
-			current: 'q11',
+			current: 'q12',
 			text: 'Томатная',
 			textContent: [['Дон Бекон', lose], ['Томатная', win], ['Мексиканская', lose]],
 			styleContainer: [' ', ' ', ' '],
 			pictureCount: 3,
 			pictureStorage: [tomat1, tomat2, tomat3]
-		},
-		{
-			current: 'q12',
-			text: 'Греческая',
-			textContent: [['Римская', lose], ['Греческая', win], ['Португальская', lose]],
-			styleContainer: [' ', ' ', ' '],
-			pictureCount: 2,
-			pictureStorage: [greek1, greek2]
 		},
 		{
 			current: 'q13',
@@ -248,8 +238,6 @@ const Inquest = () => {
 
 
 	function getLoseStatus(state) {
-		console.log(state)
-
 		setState({
 			...state.state,
 			styleContainer: ['redBack', 'redBack', 'redBack']
@@ -266,15 +254,15 @@ const Inquest = () => {
 		return `slide__button ${state.styleContainer[index]}`
 	}
 	const getStateCounter = () => {
-		return (counter.length == 14) ? 14 : (counter.length - 1)
+		return (counter.length === 15) ? 15 : (counter.length - 1)
 	}
 	const getTotalPicture = () => {
 		return state.pictureCount
 	}
 	const getTotalPictureToClass = () => {
-		if (state.pictureCount == 3) {
+		if (state.pictureCount === 3) {
 			return 'third'
-		} else if (state.pictureCount == 2) {
+		} else if (state.pictureCount === 2) {
 			return 'two'
 		}
 		return 'one'
@@ -294,7 +282,7 @@ const Inquest = () => {
 
 			<div className='slide'>
 				<div className={`slide__counter`}>
-					<span id='count' className={([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].includes(getStateCounter())) ? '' : 'hide'}>
+					<span id='count' className={([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].includes(getStateCounter())) ? '' : 'hide'}>
 						{getStateCounter()}/15
 					</span>
 				</div>

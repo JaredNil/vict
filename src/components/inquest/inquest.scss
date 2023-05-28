@@ -213,13 +213,14 @@
 	justify-content: center;
 	align-items: center;
 }
-.slide__button .start {
+.start {
+	margin-top: 65px;
 	span {
-		color: #ffffff;
-		font-size: calc(10vw * 0.5);
+		color: #40a808;
+		font-size: calc(10vw * 0.4);
 	}
 }
-.slide__button .ls05 {
+.ls05 {
 	span {
 		letter-spacing: 0.4px;
 	}
