@@ -47,6 +47,7 @@ import four from '../../resources/four/four.png'
 import season from '../../resources/season/season.png'
 
 import promo from '../../resources/promocode/promocode.png'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 
@@ -278,7 +279,14 @@ const Inquest = () => {
 			return <span>?</span>
 		}
 		let temp = state.pictureStorage[index]
-		return <img src={temp} alt="#" />
+		return <div className='img'>
+			<LazyLoadImage
+				src={temp}
+				effect="blur"
+				alt="#"
+			/>
+		</div>
+
 	}
 
 
