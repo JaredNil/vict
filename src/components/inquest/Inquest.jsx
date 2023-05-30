@@ -46,6 +46,9 @@ import four from '../../resources/four/four.png'
 
 import season from '../../resources/season/season.png'
 
+import promo from '../../resources/promocode/promocode.png'
+
+
 
 const Inquest = () => {
 	const startState = {
@@ -65,6 +68,7 @@ const Inquest = () => {
 				let newCounter = [...counter, state.current].sort()
 				setCounter(newCounter)
 			}
+			console.log(counter)
 		}, [state.current]
 	)
 
@@ -78,7 +82,7 @@ const Inquest = () => {
 	}
 
 	function win() {
-		(this.counter.length === 5)
+		(this.counter.length === 6)
 			? setState({ ...promocode, })
 			: newQuestion.bind({ ...this })()
 	}
@@ -94,7 +98,7 @@ const Inquest = () => {
 
 	const getRandomQuestion = (counter, state) => {
 
-		if (counter.length < 5) {
+		if (counter.length < 6) {
 			let random = Math.floor(Math.random() * 15)
 			while (counter.includes(`q${random}`)) {
 				random = Math.floor(Math.random() * 15)
@@ -134,7 +138,7 @@ const Inquest = () => {
 			current: 'q3',
 			text: 'Ветчина',
 			textContent: [['Бьянко', lose], ['Ветчина и сыр', win], ['Морская', lose]],
-			styleContainer: [' ', ' ', ' '],
+			styleContainer: [' ', ' ls05', ' '],
 			pictureCount: 2,
 			pictureStorage: [ham1, ham2]
 		},
@@ -150,7 +154,7 @@ const Inquest = () => {
 			current: 'q5',
 			text: 'Сырная',
 			textContent: [['Ветчина и сыр', lose], ['Гавайская', lose], ['Сырная', win]],
-			styleContainer: [' ', ' ', ' '],
+			styleContainer: [' ls05', ' ', ' '],
 			pictureCount: 3,
 			pictureStorage: [cheese1, cheese2, cheese3]
 		},
@@ -174,7 +178,7 @@ const Inquest = () => {
 			current: 'q8',
 			text: 'Цезарь',
 			textContent: [['Черепаха', lose], ['Зимний', lose], ['Цезарь с курицей', win]],
-			styleContainer: [' ', ' ', ' '],
+			styleContainer: [' ', ' ', ' ls05'],
 			pictureCount: 1,
 			pictureStorage: [cesar]
 		},
@@ -190,7 +194,7 @@ const Inquest = () => {
 			current: 'q10',
 			text: 'Сырный цыплёнок',
 			textContent: [['Сырный цыплёнок', win], ['Томатный цыпленок', lose], ['Сальса', lose]],
-			styleContainer: [' ', ' ', ' '],
+			styleContainer: [' ls05', ' ls05', ' '],
 			pictureCount: 1,
 			pictureStorage: [cheeseChicken]
 		},
@@ -214,7 +218,7 @@ const Inquest = () => {
 			current: 'q13',
 			text: '4 сыра',
 			textContent: [['4 мира', lose], ['4 сыра', win], ['4 стороны света', lose]],
-			styleContainer: [' ', ' ', ' '],
+			styleContainer: [' ', ' ', ' ls05'],
 			pictureCount: 1,
 			pictureStorage: [four]
 		},
@@ -231,9 +235,10 @@ const Inquest = () => {
 	const promocode = {
 		current: 'promo',
 		textContent: [['', () => { }], ['ПОЗДРАВЛЯЕМ', () => { }], ['', () => { }]],
-		styleContainer: [' op_0', ' ', ' op_0'],
+		styleContainer: ['dn', ' centerdn', ' dn'],
 		pictureCount: 1,
-		pictureStorage: [america1]
+		pictureStorage: [promo],
+		winnerTextFlag: true
 	}
 
 
@@ -299,7 +304,14 @@ const Inquest = () => {
 
 				</div>
 
+				{
+					state.winnerTextFlag && <div className='slide__button-promocode'>
+						<span>
+							ПРОМОКОД: <span>Нейросеть</span>
+						</span>
 
+					</div>
+				}
 				<div className="slide__buttons">
 
 					<div className={getStyleForButton(0)} onClick={getClickEventHandler(0).bind({ state, counter })}>
@@ -311,8 +323,17 @@ const Inquest = () => {
 					<div className={getStyleForButton(2)} onClick={getClickEventHandler(2).bind({ state, counter })}>
 						{getTextForButton(2)}
 					</div>
-
 				</div>
+				{
+					state.winnerTextFlag && <div className='slide__button-win'>
+						<span>
+							Пицца Пепперони 25см в подарок
+						</span>
+						<span>
+							при заказе от 799 рублей, доставка, самовывоз.
+						</span>
+					</div>
+				}
 			</div>
 
 		</div>
